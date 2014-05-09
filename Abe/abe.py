@@ -75,12 +75,12 @@ DEFAULT_TEMPLATE = """
     <p><a href="%(dotdot)sq">API</a> (machine-readable pages)</p>
     <p style="font-size: smaller">
         <span style="font-style: italic">
-            Powered by <a href="%(ABE_URL)s">%(APPNAME)s</a>
+            Powered by <a href="%(ABE_URL)s">Bitcoin-Abe</a>
         </span>
         %(download)s
         Tips appreciated!
-        <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC</a>
-        <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC</a>
+        <a href="%(DONATIONS_BTC)s">BTC</a>
+        <a href="%(DONATIONS_NMC)s">NMC</a>
     </p>
 </body>
 </html>
@@ -928,7 +928,7 @@ class Abe:
             ' public key hash, or chain name:</p>\n'
             '<form class="form-inline" action="', page['dotdot'], 'search"><p>\n'
             '<input class="form-control" name="q" size="64" value="', escape(q), '" />'
-            '<button class="form-control" type="submit">Search</button>\n'
+            '<button class="form-control btn-primary" type="submit">Search</button>\n'
             '<br />Address or hash search requires at least the first ',
             HASH_PREFIX_MIN, ' characters.</p></form>\n']
 
