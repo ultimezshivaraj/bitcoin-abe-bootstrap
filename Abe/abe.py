@@ -452,37 +452,40 @@ class Abe:
         if hi is None:
             hi = int(rows[0][1])
         basename = os.path.basename(page['env']['PATH_INFO'])
-
-        nav = ['<ul class="pagination">']
-        nav += ['<li><a href="',
-               basename, '?count=', str(count), '">&lt;&lt;</a></li>']
-        nav += [' <li><a href="', basename, '?hi=', str(hi + count),
-                 '&amp;count=', str(count), '">&lt;</a></li>']
-        nav += [' ', '<li><a href="#">&gt;</a></li>']
         
+        nav = ['<div class="input-group"><div class="input-group-btn">']
+
+        nav += ['<a class="btn btn-default btn-sm" href="',
+               basename, '?count=', str(count), '">&lt;&lt;</a>']
+        nav += [' <a class="btn btn-default btn-sm" href="', basename, '?hi=', str(hi + count),
+                 '&amp;count=', str(count), '">&lt;</a>']
+        nav += [' ', '&gt;']
         if hi >= count:
-            nav[-1] = ['<li><a href="', basename, '?hi=', str(hi - count),
-                        '&amp;count=', str(count), '">', nav[-1], '</a></li>']
-        nav += [' ', '<li><a href="#">&gt;&gt;</a></li>']
+            nav[-1] = ['<a class="btn btn-default btn-sm" href="', basename, '?hi=', str(hi - count),
+                        '&amp;count=', str(count), '">', nav[-1], '</a>']
+        else:
+            nav[-1] = ['<a class="btn btn-default btn-sm" href="#" disabled="disabled">', nav[-1], '</a>']
+        
+        nav += [' ', '&gt;&gt;']
+        
         if hi != count - 1:
-            nav[-1] = ['<li><a href="', basename, '?hi=', str(count - 1),
-                        '&amp;count=', str(count), '">', nav[-1], '</a></li>']
-        for c in (20, 50, 100, 500):
+            nav[-1] = ['<a class="btn btn-default btn-sm" href="', basename, '?hi=', str(count - 1),
+                        '&amp;count=', str(count), '">', nav[-1], '</a>']
+        else:
+            nav[-1] = ['<a class="btn btn-default btn-sm" href="#" disabled="disabled">', nav[-1], '</a>']
+            
+        for c in (20, 50, 100, 500, 2016):
             nav += [' ']
             if c != count:
-                nav += ['<li><a href="', basename, '?count=', str(c)]
+                nav += ['<a class="btn btn-default btn-sm" href="', basename, '?count=', str(c)]
                 if hi is not None:
                     nav += ['&amp;hi=', str(max(hi, c - 1))]
                 nav += ['">']
-            else:
-            	nav += ['<li><a href="">']
             nav += [' ', str(c)]
             if c != count:
-                nav += ['</a></li>']
-            else:
-                nav += ['</a></li>']
-
-        nav += [' <li><a href="', page['dotdot'], '">Search</a></li></ul>']
+                nav += ['</a>']
+                
+        nav += [' <a class="btn btn-primary btn-sm" href="', page['dotdot'], '">Search</a></div></div>']
         #print nav
         
         extra = False
@@ -927,10 +930,10 @@ class Abe:
             '<p>Search by address, block number or hash, transaction or'
             ' public key hash, or chain name:</p>\n'
             '<form class="form-inline" action="', page['dotdot'], 'search"><p>\n'
-            '<input class="form-control" name="q" size="64" value="', escape(q), '" />'
+            '<input class="form-control" name="q" size="64" width="200px" value="', escape(q), '" /> '
             '<button class="form-control btn-primary" type="submit">Search</button>\n'
             '<br />Address or hash search requires at least the first ',
-            HASH_PREFIX_MIN, ' characters.</p></form>\n']
+            HASH_PREFIX_MIN, ' characters.</p></form><br>\n']
 
     def handle_search(abe, page):
         page['title'] = 'Search'
