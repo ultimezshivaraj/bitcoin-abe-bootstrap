@@ -406,13 +406,13 @@ class DataStore(object):
                         if addr_vers is None:
                             addr_vers = "\0"
                         elif isinstance(addr_vers, unicode):
-                            addr_vers = addr_vers.encode('latin_1')
+                            addr_vers = addr_vers.encode('utf8')
 
                         script_addr_vers = dircfg.get('script_addr_vers')
                         if script_addr_vers is None:
                             script_addr_vers = "\x05"
                         elif isinstance(script_addr_vers, unicode):
-                            script_addr_vers = script_addr_vers.encode('latin_1')
+                            script_addr_vers = script_addr_vers.encode('utf8')
 
                         decimals = dircfg.get('decimals')
                         if decimals is not None:
