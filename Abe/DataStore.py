@@ -81,7 +81,7 @@ CHAIN_CONFIG = [
     {"chain":"Maxcoin"},
    
     {"chain":"Arfcoin",
-     "code3":"ARF", "address_version":"\x1e", "magic":"\xfa\xbf\xb5\xda"},
+     "code3":"ARF", "address_version":"\x1e", "magic":"\00e\x80\xe1\x84"},
 
     #{"chain":"",
     # "code3":"", "address_version":"\x", "magic":""},
